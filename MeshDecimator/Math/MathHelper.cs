@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.Numerics;
 
 namespace MeshDecimator.Math
 {
@@ -265,7 +266,8 @@ namespace MeshDecimator.Math
         {
             var dx = p1 - p0;
             var dy = p2 - p0;
-            return dx.Magnitude * ((float)System.Math.Sin(Vector3.Angle(ref dx, ref dy) * Deg2Rad) * dy.Magnitude) * 0.5f;
+
+            return dx.Length() * ((float)System.Math.Sin(MathHelper.Angle(ref dx, ref dy) * Deg2Rad) * dy.Length()) * 0.5f;
         }
 
         /// <summary>
@@ -275,12 +277,19 @@ namespace MeshDecimator.Math
         /// <param name="p1">The second point.</param>
         /// <param name="p2">The third point.</param>
         /// <returns>The triangle area.</returns>
-        public static double TriangleArea(ref Vector3d p0, ref Vector3d p1, ref Vector3d p2)
-        {
-            var dx = p1 - p0;
-            var dy = p2 - p0;
-            return dx.Magnitude * (System.Math.Sin(Vector3d.Angle(ref dx, ref dy) * Deg2Radd) * dy.Magnitude) * 0.5f;
-        }
+        //public static double TriangleArea(ref Vector3 p0, ref Vector3 p1, ref Vector3 p2)
+        //{
+        //    var dx = p1 - p0;
+        //    var dy = p2 - p0;
+        //    return dx.Length() * (System.Math.Sin(Vector3.Angle(ref dx, ref dy) * Deg2Radd) * dy.Length()) * 0.5f;
+        //}
         #endregion
+
+        public static float Angle(ref Vector3 from, ref Vector3 to)
+        {
+            Vector3 fromNormalized = Vector3.Normalize(from);
+            Vector3 toNormalized = Vector3.Normalize(to);
+            return (float)System.Math.Acos(MathHelper.Clamp(Vector3.Dot(fromNormalized, toNormalized), -1f, 1f)) * MathHelper.Rad2Deg;
+        }
     }
 }

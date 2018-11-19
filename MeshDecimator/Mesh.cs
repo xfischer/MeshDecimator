@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using MeshDecimator.Math;
 
 namespace MeshDecimator
@@ -43,7 +44,7 @@ namespace MeshDecimator
         #endregion
 
         #region Fields
-        private Vector3d[] vertices = null;
+        private Vector3[] vertices = null;
         private int[][] indices = null;
         private Vector3[] normals = null;
         private Vector4[] tangents = null;
@@ -104,7 +105,7 @@ namespace MeshDecimator
         /// <summary>
         /// Gets or sets the vertices for this mesh. Note that this resets all other vertex attributes.
         /// </summary>
-        public Vector3d[] Vertices
+        public Vector3[] Vertices
         {
             get { return vertices; }
             set
@@ -256,7 +257,7 @@ namespace MeshDecimator
         /// </summary>
         /// <param name="vertices">The mesh vertices.</param>
         /// <param name="indices">The mesh indices.</param>
-        public Mesh(Vector3d[] vertices, int[] indices)
+        public Mesh(Vector3[] vertices, int[] indices)
         {
             if (vertices == null)
                 throw new ArgumentNullException("vertices");
@@ -275,7 +276,7 @@ namespace MeshDecimator
         /// </summary>
         /// <param name="vertices">The mesh vertices.</param>
         /// <param name="indices">The mesh indices.</param>
-        public Mesh(Vector3d[] vertices, int[][] indices)
+        public Mesh(Vector3[] vertices, int[][] indices)
         {
             if (vertices == null)
                 throw new ArgumentNullException("vertices");
@@ -336,9 +337,7 @@ namespace MeshDecimator
 
                     var nx = v1 - v0;
                     var ny = v2 - v0;
-                    Vector3 normal;
-                    Vector3.Cross(ref nx, ref ny, out normal);
-                    normal.Normalize();
+                    Vector3 normal = Vector3.Normalize(Vector3.Cross(nx, ny));
 
                     normals[i0] += normal;
                     normals[i1] += normal;
@@ -348,7 +347,7 @@ namespace MeshDecimator
 
             for (int i = 0; i < vertexCount; i++)
             {
-                normals[i].Normalize();
+                normals[i] = Vector3.Normalize(normals[i]);
             }
 
             this.normals = normals;
@@ -373,7 +372,7 @@ namespace MeshDecimator
                 return;
 
             int vertexCount = vertices.Length;
-            
+
             var tangents = new Vector4[vertexCount];
             var tan1 = new Vector3[vertexCount];
             var tan2 = new Vector3[vertexCount];
@@ -431,7 +430,7 @@ namespace MeshDecimator
                         t1 = w1.Y - w0.Y;
                         t2 = w2.Y - w0.Y;
                     }
-                    
+
 
                     float x1 = (float)(v1.X - v0.X);
                     float x2 = (float)(v2.X - v0.X);
@@ -458,12 +457,10 @@ namespace MeshDecimator
                 var n = normals[i];
                 var t = tan1[i];
 
-                var tmp = (t - n * Vector3.Dot(ref n, ref t));
-                tmp.Normalize();
+                var tmp = Vector3.Normalize((t - n * Vector3.Dot(n, t)));
 
-                Vector3 c;
-                Vector3.Cross(ref n, ref t, out c);
-                float dot = Vector3.Dot(ref c, ref tan2[i]);
+                Vector3 c = Vector3.Cross(n, t);
+                float dot = Vector3.Dot(c, tan2[i]);
                 float w = (dot < 0f ? -1f : 1f);
                 tangents[i] = new Vector4(tmp.X, tmp.Y, tmp.Z, w);
             }

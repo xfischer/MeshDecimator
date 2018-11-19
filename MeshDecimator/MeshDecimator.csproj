@@ -43,6 +43,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\FastQuadricMeshSimplification.cs" />
@@ -54,20 +58,13 @@
     <Compile Include="Logging.cs" />
     <Compile Include="Math\MathHelper.cs" />
     <Compile Include="Math\SymmetricMatrix.cs" />
-    <Compile Include="Math\Vector2.cs" />
-    <Compile Include="Math\Vector2d.cs" />
-    <Compile Include="Math\Vector2i.cs" />
-    <Compile Include="Math\Vector3.cs" />
-    <Compile Include="Math\Vector3d.cs" />
-    <Compile Include="Math\Vector3i.cs" />
-    <Compile Include="Math\Vector4.cs" />
-    <Compile Include="Math\Vector4d.cs" />
-    <Compile Include="Math\Vector4i.cs" />
     <Compile Include="Mesh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MeshDecimation.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <CallTarget Targets="CopyDLL" />

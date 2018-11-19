@@ -39,6 +39,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using MeshDecimator.Collections;
 using MeshDecimator.Math;
 
@@ -74,7 +75,7 @@ namespace MeshDecimator.Algorithms
 
             public bool deleted;
             public bool dirty;
-            public Vector3d n;
+            public Vector3 n;
             #endregion
 
             #region Properties
@@ -118,7 +119,7 @@ namespace MeshDecimator.Algorithms
 
                 err0 = err1 = err2 = err3 = 0;
                 deleted = dirty = false;
-                n = new Vector3d();
+                n = new Vector3();
             }
             #endregion
 
@@ -161,7 +162,7 @@ namespace MeshDecimator.Algorithms
         #region Vertex
         private struct Vertex
         {
-            public Vector3d p;
+            public Vector3 p;
             public int tstart;
             public int tcount;
             public SymmetricMatrix q;
@@ -169,7 +170,7 @@ namespace MeshDecimator.Algorithms
             public bool seam;
             public bool foldover;
 
-            public Vertex(Vector3d p)
+            public Vertex(Vector3 p)
             {
                 this.p = p;
                 this.tstart = 0;
@@ -351,11 +352,11 @@ namespace MeshDecimator.Algorithms
         #region Calculate Error
         private double VertexError(ref SymmetricMatrix q, double x, double y, double z)
         {
-            return  q.m0*x*x + 2*q.m1*x*y + 2*q.m2*x*z + 2*q.m3*x + q.m4*y*y
-                + 2*q.m5*y*z + 2*q.m6*y +     q.m7*z*z + 2*q.m8*z + q.m9;
+            return q.m0 * x * x + 2 * q.m1 * x * y + 2 * q.m2 * x * z + 2 * q.m3 * x + q.m4 * y * y
+                + 2 * q.m5 * y * z + 2 * q.m6 * y + q.m7 * z * z + 2 * q.m8 * z + q.m9;
         }
 
-        private double CalculateError(ref Vertex vert0, ref Vertex vert1, out Vector3d result, out int resultIndex)
+        private double CalculateError(ref Vertex vert0, ref Vertex vert1, out Vector3 result, out int resultIndex)
         {
             // compute interpolated vertex
             SymmetricMatrix q = (vert0.q + vert1.q);
@@ -365,19 +366,19 @@ namespace MeshDecimator.Algorithms
             if (det != 0.0 && !border)
             {
                 // q_delta is invertible
-                result = new Vector3d(
-                    -1.0 / det * q.Determinant2(),  // vx = A41/det(q_delta)
-                    1.0 / det * q.Determinant3(),   // vy = A42/det(q_delta)
-                    -1.0 / det * q.Determinant4()); // vz = A43/det(q_delta)
+                result = new Vector3(
+                    (float)(-1.0 / det * q.Determinant2()),  // vx = A41/det(q_delta)
+                    (float)(1.0 / det * q.Determinant3()),   // vy = A42/det(q_delta)
+                    (float)(-1.0 / det * q.Determinant4())); // vz = A43/det(q_delta)
                 error = VertexError(ref q, result.X, result.Y, result.Z);
                 resultIndex = 2;
             }
             else
             {
                 // det = 0 -> try to find best result
-                Vector3d p1 = vert0.p;
-                Vector3d p2 = vert1.p;
-                Vector3d p3 = (p1 + p2) * 0.5f;
+                Vector3 p1 = vert0.p;
+                Vector3 p2 = vert1.p;
+                Vector3 p3 = (p1 + p2) * 0.5f;
                 double error1 = VertexError(ref q, p1.X, p1.Y, p1.Z);
                 double error2 = VertexError(ref q, p2.X, p2.Y, p2.Z);
                 double error3 = VertexError(ref q, p3.X, p3.Y, p3.Z);
@@ -411,7 +412,7 @@ namespace MeshDecimator.Algorithms
         /// <summary>
         /// Check if a triangle flips when this edge is removed
         /// </summary>
-        private bool Flipped(ref Vector3d p, int i0, int i1, ref Vertex v0, bool[] deleted)
+        private bool Flipped(ref Vector3 p, int i0, int i1, ref Vertex v0, bool[] deleted)
         {
             int tcount = v0.tcount;
             var refs = this.refs.Data;
@@ -432,19 +433,15 @@ namespace MeshDecimator.Algorithms
                     continue;
                 }
 
-                Vector3d d1 = vertices[id1].p - p;
-                d1.Normalize();
-                Vector3d d2 = vertices[id2].p - p;
-                d2.Normalize();
-                double dot = Vector3d.Dot(ref d1, ref d2);
+                Vector3 d1 = Vector3.Normalize(vertices[id1].p - p);
+                Vector3 d2 = Vector3.Normalize(vertices[id2].p - p);
+                double dot = Vector3.Dot(d1, d2);
                 if (System.Math.Abs(dot) > 0.999)
                     return true;
 
-                Vector3d n;
-                Vector3d.Cross(ref d1, ref d2, out n);
-                n.Normalize();
+                Vector3 n = Vector3.Normalize(Vector3.Cross(d1, d2));
                 deleted[k] = false;
-                dot = Vector3d.Dot(ref n, ref triangles[r.tid].n);
+                dot = Vector3.Dot(n, triangles[r.tid].n);
                 if (dot < 0.2)
                     return true;
             }
@@ -459,7 +456,7 @@ namespace MeshDecimator.Algorithms
         /// </summary>
         private void UpdateTriangles(int i0, int ia0, ref Vertex v, ResizableArray<bool> deleted, ref int deletedTriangles)
         {
-            Vector3d p;
+            Vector3 p;
             int pIndex;
             int tcount = v.tcount;
             var triangles = this.triangles.Data;
@@ -657,7 +654,7 @@ namespace MeshDecimator.Algorithms
             if (maxVertexCount <= 0)
                 maxVertexCount = int.MaxValue;
 
-            Vector3d p;
+            Vector3 p;
             int pIndex;
             for (int tid = 0; tid < triangleCount; tid++)
             {
@@ -961,8 +958,9 @@ namespace MeshDecimator.Algorithms
                 }
 
                 int v0, v1, v2;
-                Vector3d n, p0, p1, p2, p10, p20, dummy;
+                Vector3 n, p0, p1, p2, p10, p20, dummy;
                 int dummy2;
+
                 SymmetricMatrix sm;
                 for (int i = 0; i < triangleCount; i++)
                 {
@@ -975,11 +973,10 @@ namespace MeshDecimator.Algorithms
                     p2 = vertices[v2].p;
                     p10 = p1 - p0;
                     p20 = p2 - p0;
-                    Vector3d.Cross(ref p10, ref p20, out n);
-                    n.Normalize();
+                    n = Vector3.Normalize(Vector3.Cross(p10, p20));
                     triangles[i].n = n;
 
-                    sm = new SymmetricMatrix(n.X, n.Y, n.Z, -Vector3d.Dot(ref n, ref p0));
+                    sm = new SymmetricMatrix(n.X, n.Y, n.Z, -Vector3.Dot(n, p0));
                     vertices[v0].q += sm;
                     vertices[v1].q += sm;
                     vertices[v2].q += sm;
@@ -1417,7 +1414,7 @@ namespace MeshDecimator.Algorithms
         {
             int vertexCount = this.vertices.Length;
             int triangleCount = this.triangles.Length;
-            var vertices = new Vector3d[vertexCount];
+            var vertices = new Vector3[vertexCount];
             var indices = new int[subMeshCount][];
 
             var vertArr = this.vertices.Data;
