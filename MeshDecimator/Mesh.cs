@@ -406,39 +406,39 @@ namespace MeshDecimator
                         var w0 = uv2D[i0];
                         var w1 = uv2D[i1];
                         var w2 = uv2D[i2];
-                        s1 = w1.x - w0.x;
-                        s2 = w2.x - w0.x;
-                        t1 = w1.y - w0.y;
-                        t2 = w2.y - w0.y;
+                        s1 = w1.X - w0.X;
+                        s2 = w2.X - w0.X;
+                        t1 = w1.Y - w0.Y;
+                        t2 = w2.Y - w0.Y;
                     }
                     else if (uvIs3D)
                     {
                         var w0 = uv3D[i0];
                         var w1 = uv3D[i1];
                         var w2 = uv3D[i2];
-                        s1 = w1.x - w0.x;
-                        s2 = w2.x - w0.x;
-                        t1 = w1.y - w0.y;
-                        t2 = w2.y - w0.y;
+                        s1 = w1.X - w0.X;
+                        s2 = w2.X - w0.X;
+                        t1 = w1.Y - w0.Y;
+                        t2 = w2.Y - w0.Y;
                     }
                     else
                     {
                         var w0 = uv4D[i0];
                         var w1 = uv4D[i1];
                         var w2 = uv4D[i2];
-                        s1 = w1.x - w0.x;
-                        s2 = w2.x - w0.x;
-                        t1 = w1.y - w0.y;
-                        t2 = w2.y - w0.y;
+                        s1 = w1.X - w0.X;
+                        s2 = w2.X - w0.X;
+                        t1 = w1.Y - w0.Y;
+                        t2 = w2.Y - w0.Y;
                     }
                     
 
-                    float x1 = (float)(v1.x - v0.x);
-                    float x2 = (float)(v2.x - v0.x);
-                    float y1 = (float)(v1.y - v0.y);
-                    float y2 = (float)(v2.y - v0.y);
-                    float z1 = (float)(v1.z - v0.z);
-                    float z2 = (float)(v2.z - v0.z);
+                    float x1 = (float)(v1.X - v0.X);
+                    float x2 = (float)(v2.X - v0.X);
+                    float y1 = (float)(v1.Y - v0.Y);
+                    float y2 = (float)(v2.Y - v0.Y);
+                    float z1 = (float)(v1.Z - v0.Z);
+                    float z2 = (float)(v2.Z - v0.Z);
                     float r = 1f / (s1 * t2 - s2 * t1);
 
                     var sdir = new Vector3((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
@@ -465,7 +465,7 @@ namespace MeshDecimator
                 Vector3.Cross(ref n, ref t, out c);
                 float dot = Vector3.Dot(ref c, ref tan2[i]);
                 float w = (dot < 0f ? -1f : 1f);
-                tangents[i] = new Vector4(tmp.x, tmp.y, tmp.z, w);
+                tangents[i] = new Vector4(tmp.X, tmp.Y, tmp.Z, w);
             }
 
             this.tangents = tangents;

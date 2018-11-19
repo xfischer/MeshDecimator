@@ -369,7 +369,7 @@ namespace MeshDecimator.Algorithms
                     -1.0 / det * q.Determinant2(),  // vx = A41/det(q_delta)
                     1.0 / det * q.Determinant3(),   // vy = A42/det(q_delta)
                     -1.0 / det * q.Determinant4()); // vz = A43/det(q_delta)
-                error = VertexError(ref q, result.x, result.y, result.z);
+                error = VertexError(ref q, result.X, result.Y, result.Z);
                 resultIndex = 2;
             }
             else
@@ -378,9 +378,9 @@ namespace MeshDecimator.Algorithms
                 Vector3d p1 = vert0.p;
                 Vector3d p2 = vert1.p;
                 Vector3d p3 = (p1 + p2) * 0.5f;
-                double error1 = VertexError(ref q, p1.x, p1.y, p1.z);
-                double error2 = VertexError(ref q, p2.x, p2.y, p2.z);
-                double error3 = VertexError(ref q, p3.x, p3.y, p3.z);
+                double error1 = VertexError(ref q, p1.X, p1.Y, p1.Z);
+                double error2 = VertexError(ref q, p2.X, p2.Y, p2.Z);
+                double error3 = VertexError(ref q, p3.X, p3.Y, p3.Z);
                 error = MathHelper.Min(error1, error2, error3);
                 if (error == error3)
                 {
@@ -860,13 +860,13 @@ namespace MeshDecimator.Algorithms
 
                             if (enableSmartLink)
                             {
-                                if (vertices[id].p.x < borderMinX)
+                                if (vertices[id].p.X < borderMinX)
                                 {
-                                    borderMinX = vertices[id].p.x;
+                                    borderMinX = vertices[id].p.X;
                                 }
-                                if (vertices[id].p.x > borderMaxX)
+                                if (vertices[id].p.X > borderMaxX)
                                 {
-                                    borderMaxX = vertices[id].p.x;
+                                    borderMaxX = vertices[id].p.X;
                                 }
                             }
                         }
@@ -883,7 +883,7 @@ namespace MeshDecimator.Algorithms
                     {
                         if (vertices[i].border)
                         {
-                            int vertexHash = (int)(((((vertices[i].p.x - borderMinX) / borderAreaWidth) * 2.0) - 1.0) * int.MaxValue);
+                            int vertexHash = (int)(((((vertices[i].p.X - borderMinX) / borderAreaWidth) * 2.0) - 1.0) * int.MaxValue);
                             borderVertices[borderIndexCount] = new BorderVertex(i, vertexHash);
                             ++borderIndexCount;
                         }
@@ -913,9 +913,9 @@ namespace MeshDecimator.Algorithms
                                 break;
 
                             var otherPoint = vertices[otherIndex].p;
-                            var sqrX = ((myPoint.x - otherPoint.x) * (myPoint.x - otherPoint.x));
-                            var sqrY = ((myPoint.y - otherPoint.y) * (myPoint.y - otherPoint.y));
-                            var sqrZ = ((myPoint.z - otherPoint.z) * (myPoint.z - otherPoint.z));
+                            var sqrX = ((myPoint.X - otherPoint.X) * (myPoint.X - otherPoint.X));
+                            var sqrY = ((myPoint.Y - otherPoint.Y) * (myPoint.Y - otherPoint.Y));
+                            var sqrZ = ((myPoint.Z - otherPoint.Z) * (myPoint.Z - otherPoint.Z));
                             var sqrMagnitude = sqrX + sqrY + sqrZ;
 
                             if (sqrMagnitude <= vertexLinkDistanceSqr)
@@ -979,7 +979,7 @@ namespace MeshDecimator.Algorithms
                     n.Normalize();
                     triangles[i].n = n;
 
-                    sm = new SymmetricMatrix(n.x, n.y, n.z, -Vector3d.Dot(ref n, ref p0));
+                    sm = new SymmetricMatrix(n.X, n.Y, n.Z, -Vector3d.Dot(ref n, ref p0));
                     vertices[v0].q += sm;
                     vertices[v1].q += sm;
                     vertices[v2].q += sm;

@@ -584,7 +584,7 @@ namespace MeshDecimatorTool
                     for (int i = 0; i < texCoordCount; i++)
                     {
                         var texCoord = processedTexCoordList[i];
-                        texCoords2D[i] = new Vector2(texCoord.x, texCoord.y);
+                        texCoords2D[i] = new Vector2(texCoord.X, texCoord.Y);
                     }
                 }
             }
@@ -711,11 +711,11 @@ namespace MeshDecimatorTool
             {
                 var vertex = vertices[i];
                 writer.Write("v ");
-                writer.Write(vertex.x.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(vertex.X.ToString("g", CultureInfo.InvariantCulture));
                 writer.Write(' ');
-                writer.Write(vertex.y.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(vertex.Y.ToString("g", CultureInfo.InvariantCulture));
                 writer.Write(' ');
-                writer.Write(vertex.z.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(vertex.Z.ToString("g", CultureInfo.InvariantCulture));
                 writer.WriteLine();
             }
         }
@@ -729,11 +729,11 @@ namespace MeshDecimatorTool
             {
                 var normal = normals[i];
                 writer.Write("vn ");
-                writer.Write(normal.x.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(normal.X.ToString("g", CultureInfo.InvariantCulture));
                 writer.Write(' ');
-                writer.Write(normal.y.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(normal.Y.ToString("g", CultureInfo.InvariantCulture));
                 writer.Write(' ');
-                writer.Write(normal.z.ToString("g", CultureInfo.InvariantCulture));
+                writer.Write(normal.Z.ToString("g", CultureInfo.InvariantCulture));
                 writer.WriteLine();
             }
         }
@@ -746,9 +746,9 @@ namespace MeshDecimatorTool
                 {
                     var texCoord = texCoords2D[i];
                     writer.Write("vt ");
-                    writer.Write(texCoord.x.ToString("g", CultureInfo.InvariantCulture));
+                    writer.Write(texCoord.X.ToString("g", CultureInfo.InvariantCulture));
                     writer.Write(' ');
-                    writer.Write(texCoord.y.ToString("g", CultureInfo.InvariantCulture));
+                    writer.Write(texCoord.Y.ToString("g", CultureInfo.InvariantCulture));
                     writer.WriteLine();
                 }
             }
@@ -758,11 +758,11 @@ namespace MeshDecimatorTool
                 {
                     var texCoord = texCoords3D[i];
                     writer.Write("vt ");
-                    writer.Write(texCoord.x.ToString("g", CultureInfo.InvariantCulture));
+                    writer.Write(texCoord.X.ToString("g", CultureInfo.InvariantCulture));
                     writer.Write(' ');
-                    writer.Write(texCoord.y.ToString("g", CultureInfo.InvariantCulture));
+                    writer.Write(texCoord.Y.ToString("g", CultureInfo.InvariantCulture));
                     writer.Write(' ');
-                    writer.Write(texCoord.z.ToString("g", CultureInfo.InvariantCulture));
+                    writer.Write(texCoord.Z.ToString("g", CultureInfo.InvariantCulture));
                     writer.WriteLine();
                 }
             }

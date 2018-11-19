@@ -241,7 +241,7 @@ namespace MeshDecimator.Math
         /// <param name="v">The single-precision vector.</param>
         public static implicit operator Vector2d(Vector2 v)
         {
-            return new Vector2d(v.x, v.y);
+            return new Vector2d(v.X, v.Y);
         }
 
         /// <summary>

@@ -233,7 +233,7 @@ namespace MeshDecimator.Math
         /// <param name="v">The single-precision vector.</param>
         public static implicit operator Vector3i(Vector3 v)
         {
-            return new Vector3i((int)v.x, (int)v.y, (int)v.z);
+            return new Vector3i((int)v.X, (int)v.Y, (int)v.Z);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MeshDecimator.Math
         /// <param name="v">The double-precision vector.</param>
         public static explicit operator Vector3i(Vector3d v)
         {
-            return new Vector3i((int)v.x, (int)v.y, (int)v.z);
+            return new Vector3i((int)v.X, (int)v.Y, (int)v.Z);
         }
         #endregion
 

@@ -820,12 +820,12 @@
             The vector epsilon.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector2.x">
+        <member name="F:MeshDecimator.Math.Vector2.X">
             <summary>
             The x component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector2.y">
+        <member name="F:MeshDecimator.Math.Vector2.Y">
             <summary>
             The y component.
             </summary>
@@ -1451,17 +1451,17 @@
             The vector epsilon.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3.x">
+        <member name="F:MeshDecimator.Math.Vector3.X">
             <summary>
             The x component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3.y">
+        <member name="F:MeshDecimator.Math.Vector3.Y">
             <summary>
             The y component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3.z">
+        <member name="F:MeshDecimator.Math.Vector3.Z">
             <summary>
             The z component.
             </summary>
@@ -1480,12 +1480,6 @@
             <summary>
             Gets a normalized vector from this vector.
             </summary>
-        </member>
-        <member name="P:MeshDecimator.Math.Vector3.Item(System.Int32)">
-            <summary>
-            Gets or sets a specific component by index in this vector.
-            </summary>
-            <param name="index">The component index.</param>
         </member>
         <member name="M:MeshDecimator.Math.Vector3.#ctor(System.Single)">
             <summary>
@@ -1710,17 +1704,17 @@
             The vector epsilon.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3d.x">
+        <member name="F:MeshDecimator.Math.Vector3d.X">
             <summary>
             The x component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3d.y">
+        <member name="F:MeshDecimator.Math.Vector3d.Y">
             <summary>
             The y component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector3d.z">
+        <member name="F:MeshDecimator.Math.Vector3d.Z">
             <summary>
             The z component.
             </summary>
@@ -2154,22 +2148,22 @@
             The vector epsilon.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector4.x">
+        <member name="F:MeshDecimator.Math.Vector4.X">
             <summary>
             The x component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector4.y">
+        <member name="F:MeshDecimator.Math.Vector4.Y">
             <summary>
             The y component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector4.z">
+        <member name="F:MeshDecimator.Math.Vector4.Z">
             <summary>
             The z component.
             </summary>
         </member>
-        <member name="F:MeshDecimator.Math.Vector4.w">
+        <member name="F:MeshDecimator.Math.Vector4.W">
             <summary>
             The w component.
             </summary>

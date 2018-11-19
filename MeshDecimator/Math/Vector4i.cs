@@ -245,7 +245,7 @@ namespace MeshDecimator.Math
         /// <param name="v">The single-precision vector.</param>
         public static explicit operator Vector4i(Vector4 v)
         {
-            return new Vector4i((int)v.x, (int)v.y, (int)v.z, (int)v.w);
+            return new Vector4i((int)v.X, (int)v.Y, (int)v.Z, (int)v.W);
         }
 
         /// <summary>

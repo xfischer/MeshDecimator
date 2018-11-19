@@ -52,11 +52,11 @@ namespace MeshDecimator.Math
         /// <summary>
         /// The x component.
         /// </summary>
-        public float x;
+        public float X;
         /// <summary>
         /// The y component.
         /// </summary>
-        public float y;
+        public float Y;
         #endregion
 
         #region Properties
@@ -65,7 +65,7 @@ namespace MeshDecimator.Math
         /// </summary>
         public float Magnitude
         {
-            get { return (float)System.Math.Sqrt(x * x + y * y); }
+            get { return (float)System.Math.Sqrt(X * X + Y * Y); }
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MeshDecimator.Math
         /// </summary>
         public float MagnitudeSqr
         {
-            get { return (x * x + y * y); }
+            get { return (X * X + Y * Y); }
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace MeshDecimator.Math
                 switch (index)
                 {
                     case 0:
-                        return x;
+                        return X;
                     case 1:
-                        return y;
+                        return Y;
                     default:
                         throw new IndexOutOfRangeException("Invalid Vector2 index!");
                 }
@@ -112,10 +112,10 @@ namespace MeshDecimator.Math
                 switch (index)
                 {
                     case 0:
-                        x = value;
+                        X = value;
                         break;
                     case 1:
-                        y = value;
+                        Y = value;
                         break;
                     default:
                         throw new IndexOutOfRangeException("Invalid Vector2 index!");
@@ -131,8 +131,8 @@ namespace MeshDecimator.Math
         /// <param name="value">The value.</param>
         public Vector2(float value)
         {
-            this.x = value;
-            this.y = value;
+            this.X = value;
+            this.Y = value;
         }
 
         /// <summary>
@@ -142,8 +142,8 @@ namespace MeshDecimator.Math
         /// <param name="y">The y value.</param>
         public Vector2(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
         #endregion
 
@@ -156,7 +156,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator +(Vector2 a, Vector2 b)
         {
-            return new Vector2(a.x + b.x, a.y + b.y);
+            return new Vector2(a.X + b.X, a.Y + b.Y);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator -(Vector2 a, Vector2 b)
         {
-            return new Vector2(a.x - b.x, a.y - b.y);
+            return new Vector2(a.X - b.X, a.Y - b.Y);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator *(Vector2 a, float d)
         {
-            return new Vector2(a.x * d, a.y * d);
+            return new Vector2(a.X * d, a.Y * d);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator *(float d, Vector2 a)
         {
-            return new Vector2(a.x * d, a.y * d);
+            return new Vector2(a.X * d, a.Y * d);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator /(Vector2 a, float d)
         {
-            return new Vector2(a.x / d, a.y / d);
+            return new Vector2(a.X / d, a.Y / d);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector2 operator -(Vector2 a)
         {
-            return new Vector2(-a.x, -a.y);
+            return new Vector2(-a.X, -a.Y);
         }
 
         /// <summary>
@@ -263,8 +263,8 @@ namespace MeshDecimator.Math
         /// <param name="y">The y value.</param>
         public void Set(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>
@@ -273,8 +273,8 @@ namespace MeshDecimator.Math
         /// <param name="scale">The vector to multiply with.</param>
         public void Scale(ref Vector2 scale)
         {
-            x *= scale.x;
-            y *= scale.y;
+            X *= scale.X;
+            Y *= scale.Y;
         }
 
         /// <summary>
@@ -285,12 +285,12 @@ namespace MeshDecimator.Math
             float mag = this.Magnitude;
             if (mag > Epsilon)
             {
-                x /= mag;
-                y /= mag;
+                X /= mag;
+                Y /= mag;
             }
             else
             {
-                x = y = 0;
+                X = Y = 0;
             }
         }
 
@@ -301,11 +301,11 @@ namespace MeshDecimator.Math
         /// <param name="max">The maximum component value.</param>
         public void Clamp(float min, float max)
         {
-            if (x < min) x = min;
-            else if (x > max) x = max;
+            if (X < min) X = min;
+            else if (X > max) X = max;
 
-            if (y < min) y = min;
-            else if (y > max) y = max;
+            if (Y < min) Y = min;
+            else if (Y > max) Y = max;
         }
         #endregion
 
@@ -316,7 +316,7 @@ namespace MeshDecimator.Math
         /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() << 2;
+            return X.GetHashCode() ^ Y.GetHashCode() << 2;
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace MeshDecimator.Math
                 return false;
             }
             Vector2 vector = (Vector2)other;
-            return (x == vector.x && y == vector.y);
+            return (X == vector.X && Y == vector.Y);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace MeshDecimator.Math
         /// <returns>If equals.</returns>
         public bool Equals(Vector2 other)
         {
-            return (x == other.x && y == other.y);
+            return (X == other.X && Y == other.Y);
         }
 
         /// <summary>
@@ -351,8 +351,8 @@ namespace MeshDecimator.Math
         public override string ToString()
         {
             return string.Format("({0}, {1})",
-                x.ToString("F1", CultureInfo.InvariantCulture),
-                y.ToString("F1", CultureInfo.InvariantCulture));
+                X.ToString("F1", CultureInfo.InvariantCulture),
+                Y.ToString("F1", CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -363,8 +363,8 @@ namespace MeshDecimator.Math
         public string ToString(string format)
         {
             return string.Format("({0}, {1})",
-                x.ToString(format, CultureInfo.InvariantCulture),
-                y.ToString(format, CultureInfo.InvariantCulture));
+                X.ToString(format, CultureInfo.InvariantCulture),
+                Y.ToString(format, CultureInfo.InvariantCulture));
         }
         #endregion
 
@@ -376,7 +376,7 @@ namespace MeshDecimator.Math
         /// <param name="rhs">The right hand side vector.</param>
         public static float Dot(ref Vector2 lhs, ref Vector2 rhs)
         {
-            return lhs.x * rhs.x + lhs.y * rhs.y;
+            return lhs.X * rhs.X + lhs.Y * rhs.Y;
         }
         
         /// <summary>
@@ -388,7 +388,7 @@ namespace MeshDecimator.Math
         /// <param name="result">The resulting vector.</param>
         public static void Lerp(ref Vector2 a, ref Vector2 b, float t, out Vector2 result)
         {
-            result = new Vector2(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t);
+            result = new Vector2(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace MeshDecimator.Math
         /// <param name="result">The resulting vector.</param>
         public static void Scale(ref Vector2 a, ref Vector2 b, out Vector2 result)
         {
-            result = new Vector2(a.x * b.x, a.y * b.y);
+            result = new Vector2(a.X * b.X, a.Y * b.Y);
         }
 
         /// <summary>
@@ -412,7 +412,7 @@ namespace MeshDecimator.Math
             float mag = value.Magnitude;
             if (mag > Epsilon)
             {
-                result = new Vector2(value.x / mag, value.y / mag);
+                result = new Vector2(value.X / mag, value.Y / mag);
             }
             else
             {

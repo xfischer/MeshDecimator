@@ -52,15 +52,15 @@ namespace MeshDecimator.Math
         /// <summary>
         /// The x component.
         /// </summary>
-        public double x;
+        public double X;
         /// <summary>
         /// The y component.
         /// </summary>
-        public double y;
+        public double Y;
         /// <summary>
         /// The z component.
         /// </summary>
-        public double z;
+        public double Z;
         #endregion
 
         #region Properties
@@ -69,7 +69,7 @@ namespace MeshDecimator.Math
         /// </summary>
         public double Magnitude
         {
-            get { return System.Math.Sqrt(x * x + y * y + z * z); }
+            get { return System.Math.Sqrt(X * X + Y * Y + Z * Z); }
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MeshDecimator.Math
         /// </summary>
         public double MagnitudeSqr
         {
-            get { return (x * x + y * y + z * z); }
+            get { return (X * X + Y * Y + Z * Z); }
         }
 
         /// <summary>
@@ -104,11 +104,11 @@ namespace MeshDecimator.Math
                 switch (index)
                 {
                     case 0:
-                        return x;
+                        return X;
                     case 1:
-                        return y;
+                        return Y;
                     case 2:
-                        return z;
+                        return Z;
                     default:
                         throw new IndexOutOfRangeException("Invalid Vector3d index!");
                 }
@@ -118,13 +118,13 @@ namespace MeshDecimator.Math
                 switch (index)
                 {
                     case 0:
-                        x = value;
+                        X = value;
                         break;
                     case 1:
-                        y = value;
+                        Y = value;
                         break;
                     case 2:
-                        z = value;
+                        Z = value;
                         break;
                     default:
                         throw new IndexOutOfRangeException("Invalid Vector3d index!");
@@ -140,9 +140,9 @@ namespace MeshDecimator.Math
         /// <param name="value">The value.</param>
         public Vector3d(double value)
         {
-            this.x = value;
-            this.y = value;
-            this.z = value;
+            this.X = value;
+            this.Y = value;
+            this.Z = value;
         }
 
         /// <summary>
@@ -153,9 +153,9 @@ namespace MeshDecimator.Math
         /// <param name="z">The z value.</param>
         public Vector3d(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace MeshDecimator.Math
         /// <param name="vector">The single precision vector.</param>
         public Vector3d(Vector3 vector)
         {
-            this.x = vector.x;
-            this.y = vector.y;
-            this.z = vector.z;
+            this.X = vector.X;
+            this.Y = vector.Y;
+            this.Z = vector.Z;
         }
         #endregion
 
@@ -179,7 +179,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator +(Vector3d a, Vector3d b)
         {
-            return new Vector3d(a.x + b.x, a.y + b.y, a.z + b.z);
+            return new Vector3d(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator -(Vector3d a, Vector3d b)
         {
-            return new Vector3d(a.x - b.x, a.y - b.y, a.z - b.z);
+            return new Vector3d(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator *(Vector3d a, double d)
         {
-            return new Vector3d(a.x * d, a.y * d, a.z * d);
+            return new Vector3d(a.X * d, a.Y * d, a.Z * d);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator *(double d, Vector3d a)
         {
-            return new Vector3d(a.x * d, a.y * d, a.z * d);
+            return new Vector3d(a.X * d, a.Y * d, a.Z * d);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator /(Vector3d a, double d)
         {
-            return new Vector3d(a.x / d, a.y / d, a.z / d);
+            return new Vector3d(a.X / d, a.Y / d, a.Z / d);
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace MeshDecimator.Math
         /// <returns>The resulting vector.</returns>
         public static Vector3d operator -(Vector3d a)
         {
-            return new Vector3d(-a.x, -a.y, -a.z);
+            return new Vector3d(-a.X, -a.Y, -a.Z);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace MeshDecimator.Math
         /// <param name="v">The single-precision vector.</param>
         public static implicit operator Vector3d(Vector3 v)
         {
-            return new Vector3d(v.x, v.y, v.z);
+            return new Vector3d(v.X, v.Y, v.Z);
         }
 
         /// <summary>
@@ -287,9 +287,9 @@ namespace MeshDecimator.Math
         /// <param name="z">The z value.</param>
         public void Set(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         /// <summary>
@@ -298,9 +298,9 @@ namespace MeshDecimator.Math
         /// <param name="scale">The vector to multiply with.</param>
         public void Scale(ref Vector3d scale)
         {
-            x *= scale.x;
-            y *= scale.y;
-            z *= scale.z;
+            X *= scale.X;
+            Y *= scale.Y;
+            Z *= scale.Z;
         }
 
         /// <summary>
@@ -311,13 +311,13 @@ namespace MeshDecimator.Math
             double mag = this.Magnitude;
             if (mag > Epsilon)
             {
-                x /= mag;
-                y /= mag;
-                z /= mag;
+                X /= mag;
+                Y /= mag;
+                Z /= mag;
             }
             else
             {
-                x = y = z = 0;
+                X = Y = Z = 0;
             }
         }
 
@@ -328,14 +328,14 @@ namespace MeshDecimator.Math
         /// <param name="max">The maximum component value.</param>
         public void Clamp(double min, double max)
         {
-            if (x < min) x = min;
-            else if (x > max) x = max;
+            if (X < min) X = min;
+            else if (X > max) X = max;
 
-            if (y < min) y = min;
-            else if (y > max) y = max;
+            if (Y < min) Y = min;
+            else if (Y > max) Y = max;
 
-            if (z < min) z = min;
-            else if (z > max) z = max;
+            if (Z < min) Z = min;
+            else if (Z > max) Z = max;
         }
         #endregion
 
@@ -346,7 +346,7 @@ namespace MeshDecimator.Math
         /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() << 2 ^ z.GetHashCode() >> 2;
+            return X.GetHashCode() ^ Y.GetHashCode() << 2 ^ Z.GetHashCode() >> 2;
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace MeshDecimator.Math
                 return false;
             }
             Vector3d vector = (Vector3d)other;
-            return (x == vector.x && y == vector.y && z == vector.z);
+            return (X == vector.X && Y == vector.Y && Z == vector.Z);
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace MeshDecimator.Math
         /// <returns>If equals.</returns>
         public bool Equals(Vector3d other)
         {
-            return (x == other.x && y == other.y && z == other.z);
+            return (X == other.X && Y == other.Y && Z == other.Z);
         }
 
         /// <summary>
@@ -381,9 +381,9 @@ namespace MeshDecimator.Math
         public override string ToString()
         {
             return string.Format("({0}, {1}, {2})",
-                x.ToString("F1", CultureInfo.InvariantCulture),
-                y.ToString("F1", CultureInfo.InvariantCulture),
-                z.ToString("F1", CultureInfo.InvariantCulture));
+                X.ToString("F1", CultureInfo.InvariantCulture),
+                Y.ToString("F1", CultureInfo.InvariantCulture),
+                Z.ToString("F1", CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -394,9 +394,9 @@ namespace MeshDecimator.Math
         public string ToString(string format)
         {
             return string.Format("({0}, {1}, {2})",
-                x.ToString(format, CultureInfo.InvariantCulture),
-                y.ToString(format, CultureInfo.InvariantCulture),
-                z.ToString(format, CultureInfo.InvariantCulture));
+                X.ToString(format, CultureInfo.InvariantCulture),
+                Y.ToString(format, CultureInfo.InvariantCulture),
+                Z.ToString(format, CultureInfo.InvariantCulture));
         }
         #endregion
 
@@ -408,7 +408,7 @@ namespace MeshDecimator.Math
         /// <param name="rhs">The right hand side vector.</param>
         public static double Dot(ref Vector3d lhs, ref Vector3d rhs)
         {
-            return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+            return lhs.X * rhs.X + lhs.Y * rhs.Y + lhs.Z * rhs.Z;
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace MeshDecimator.Math
         /// <param name="result">The resulting vector.</param>
         public static void Cross(ref Vector3d lhs, ref Vector3d rhs, out Vector3d result)
         {
-            result = new Vector3d(lhs.y * rhs.z - lhs.z * rhs.y, lhs.z * rhs.x - lhs.x * rhs.z, lhs.x * rhs.y - lhs.y * rhs.x);
+            result = new Vector3d(lhs.Y * rhs.Z - lhs.Z * rhs.Y, lhs.Z * rhs.X - lhs.X * rhs.Z, lhs.X * rhs.Y - lhs.Y * rhs.X);
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace MeshDecimator.Math
         /// <param name="result">The resulting vector.</param>
         public static void Lerp(ref Vector3d a, ref Vector3d b, double t, out Vector3d result)
         {
-            result = new Vector3d(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
+            result = new Vector3d(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t, a.Z + (b.Z - a.Z) * t);
         }
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace MeshDecimator.Math
         /// <param name="result">The resulting vector.</param>
         public static void Scale(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
-            result = new Vector3d(a.x * b.x, a.y * b.y, a.z * b.z);
+            result = new Vector3d(a.X * b.X, a.Y * b.Y, a.Z * b.Z);
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace MeshDecimator.Math
             double mag = value.Magnitude;
             if (mag > Epsilon)
             {
-                result = new Vector3d(value.x / mag, value.y / mag, value.z / mag);
+                result = new Vector3d(value.X / mag, value.Y / mag, value.Z / mag);
             }
             else
             {
