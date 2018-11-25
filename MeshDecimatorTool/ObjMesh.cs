@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
 using MeshDecimator.Math;
+using System.Numerics;
 
 namespace MeshDecimatorTool
 {
@@ -86,7 +87,7 @@ namespace MeshDecimatorTool
         #endregion
 
         #region Fields
-        private Vector3d[] vertices = null;
+        private Vector3[] vertices = null;
         private Vector3[] normals = null;
         private Vector2[] texCoords2D = null;
         private Vector3[] texCoords3D = null;
@@ -100,7 +101,7 @@ namespace MeshDecimatorTool
         /// <summary>
         /// Gets or sets the vertices for this mesh.
         /// </summary>
-        public Vector3d[] Vertices
+        public Vector3[] Vertices
         {
             get { return vertices; }
             set { vertices = value; }
@@ -256,7 +257,7 @@ namespace MeshDecimatorTool
         /// </summary>
         /// <param name="vertices">The mesh vertices.</param>
         /// <param name="indices">The mesh indices.</param>
-        public ObjMesh(Vector3d[] vertices, int[] indices)
+        public ObjMesh(Vector3[] vertices, int[] indices)
         {
             this.vertices = vertices;
             this.subMeshIndices = (indices != null ? new int[][] { indices } : null);
@@ -267,7 +268,7 @@ namespace MeshDecimatorTool
         /// </summary>
         /// <param name="vertices">The mesh vertices.</param>
         /// <param name="indices">The mesh indices.</param>
-        public ObjMesh(Vector3d[] vertices, int[][] indices)
+        public ObjMesh(Vector3[] vertices, int[][] indices)
         {
             this.vertices = vertices;
             this.subMeshIndices = indices;
@@ -284,10 +285,10 @@ namespace MeshDecimatorTool
         public void ReadFile(string path)
         {
             var materialLibraryList = new List<string>();
-            var readVertexList = new List<Vector3d>(VertexInitialCapacity);
+            var readVertexList = new List<Vector3>(VertexInitialCapacity);
             List<Vector3> readNormalList = null;
             List<Vector3> readTexCoordList = null;
-            var vertexList = new List<Vector3d>(VertexInitialCapacity);
+            var vertexList = new List<Vector3>(VertexInitialCapacity);
             List<Vector3> normalList = null;
             List<Vector3> texCoordList = null;
             var triangleIndexList = new List<int>(IndexInitialCapacity);
@@ -316,11 +317,11 @@ namespace MeshDecimatorTool
                         if (lineSplit.Length < 4)
                             throw new InvalidDataException("Vertices needs at least 3 components.");
 
-                        double f0, f1, f2;
-                        double.TryParse(lineSplit[1], NumberStyles.Float, CultureInfo.InvariantCulture, out f0);
-                        double.TryParse(lineSplit[2], NumberStyles.Float, CultureInfo.InvariantCulture, out f1);
-                        double.TryParse(lineSplit[3], NumberStyles.Float, CultureInfo.InvariantCulture, out f2);
-                        readVertexList.Add(new Vector3d(f0, f1, f2));
+                        float f0, f1, f2;
+                        float.TryParse(lineSplit[1], NumberStyles.Float, CultureInfo.InvariantCulture, out f0);
+                        float.TryParse(lineSplit[2], NumberStyles.Float, CultureInfo.InvariantCulture, out f1);
+                        float.TryParse(lineSplit[3], NumberStyles.Float, CultureInfo.InvariantCulture, out f2);
+                        readVertexList.Add(new Vector3(f0, f1, f2));
                     }
                     else if (string.Equals(firstPart, "vn"))
                     {
@@ -442,7 +443,7 @@ namespace MeshDecimatorTool
                                     }
                                     else
                                     {
-                                        normalList.Add(Vector3.zero);
+                                        normalList.Add(Vector3.Zero);
                                     }
                                 }
 
@@ -457,7 +458,7 @@ namespace MeshDecimatorTool
                                     }
                                     else
                                     {
-                                        texCoordList.Add(Vector3.zero);
+                                        texCoordList.Add(Vector3.Zero);
                                     }
                                 }
                             }
@@ -530,7 +531,7 @@ namespace MeshDecimatorTool
             bool hasNormals = (readNormalList != null);
             bool hasTexCoords = (readTexCoordList != null);
             int vertexCount = vertexList.Count;
-            var processedVertexList = new List<Vector3d>(vertexCount);
+            var processedVertexList = new List<Vector3>(vertexCount);
             var processedNormalList = (hasNormals ? new List<Vector3>(vertexCount) : null);
             var processedTexCoordList = (hasTexCoords ? new List<Vector3>(vertexCount) : null);
             var processedIndices = new List<int[]>(subMeshCount);
@@ -595,7 +596,7 @@ namespace MeshDecimatorTool
             }
 
             /*
-            vertices = new Vector3d[faceCount];
+            vertices = new Vector3[faceCount];
             for (int i = 0; i < faceCount; i++)
             {
                 int vertexIndex = faceList[i].x;
@@ -705,7 +706,7 @@ namespace MeshDecimatorTool
         #endregion
 
         #region Private Methods
-        private static void WriteVertices(TextWriter writer, Vector3d[] vertices)
+        private static void WriteVertices(TextWriter writer, Vector3[] vertices)
         {
             for (int i = 0; i < vertices.Length; i++)
             {
